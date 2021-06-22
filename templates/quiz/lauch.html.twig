@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QuizController!{% endblock %}
+
+{% block body %}
+<form action="" method="POST" >
+    <div class="container">
+        {% for question in questions %}
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>{{ question.content }}</p>
+                    {% for answer in question.getAnswers %}
+                    <div>
+                        <input type="radio" id="{{  question.id }}" name="{{ question.id }}" value="{{ answer.content }}" required>
+                        <label for="{{ answer.content }}">{{ answer.content }} => {{ answer.correct }}</label>
+                      </div>
+                    {% endfor %}
+                </div>
+        {% endfor %}
+        </div>
+    </div>
+    <div>
+        <input type="hidden" name="check" value="">
+        <button type="submit" class="btn btn-primary">J'ai fini</button>
+    </div>
+</form>
+{% endblock %}

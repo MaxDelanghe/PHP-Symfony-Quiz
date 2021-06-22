@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="container">
+
+<div class="border">
+    <p class="text-success text-decoration-underline">Vert indique une reponse choisie et correct</p>
+    <p class="text-danger text-decoration-underline">rouge indique une reponse choisie mais incorrect</p>
+    <p class="text-primary text-decoration-underline">Bleu indique la bonne reponse</p>
+</div>
+{% for question in questions %}
+    <p>{{ question.content }}</p>
+        {% for answer in question.getAnswers %}
+            {% set expect = false %}
+                {% for result in results %}
+                    {% if answer.content ==  result[0]%}
+                        {% if result[1] == true %}
+                            {% set expect = 'correct' %}
+                        {% else %}
+                            {% set expect = 'incorect' %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+             {% if expect == 'correct' %}
+                <p class="text-success">{{ answer.content }}</p>
+             {% elseif expect == 'incorect' %}
+                <p class="text-danger">{{ answer.content }}</p>
+             {% elseif answer.correct == true %}
+                 <p class="text-primary">{{ answer.content }}</p>
+             {% else %}
+                 <p class="">{{ answer.content }}</p>
+             {% endif %}
+    {% endfor %}
+{% endfor %}
+    
+</div>
+{% endblock %}

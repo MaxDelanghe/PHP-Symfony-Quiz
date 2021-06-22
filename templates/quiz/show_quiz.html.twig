@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ quiz.name }} {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h1>{{ quiz.name }}</h1>
+            <a href="{{ path("lauch_quiz", {'id': quiz.id} ) }}" class="btn btn-success">Quizzéé !</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <h3>Mon profil</h3>
+    <div style="background-color: #EBEBEB; padding: 1.5em; margin-bottom: 2em;">
+        <p>Email : {{ user.email}}</p>
+        <p>Username : {{ user.username}}</p>
+        <p>Pseudo : {{ user.pseudo}}</p>
+        <a href="{{ path('profil_update')}}" class="btn btn-success">Mettre a jour ses infos personel</a>
+        <a href="{{ path('profil_email_update')}}" class="btn text-light bg-dark">Mettre a jour son email</a>
+        <a href="{{ path('profil_password_update')}}" class="btn btn-danger">Mettre a jour son mdp</a>
+    </div>
+
+    <h4>Mes quizs :</h4>
+    <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom du quiz</th>
+            <th scope="col">Categorie</th>
+            <th scope="col">Popularite</th>
+            <th scope="col">Date de creation</th>
+          </tr>
+        </thead>
+        <tbody>
+    {% set i = 1 %}
+    {% for collection in collections %}
+          <tr>
+            <th scope="row">{{i}}</th>
+            <td>{{  collection.name   }}</td>
+            <td>{{  collection.categorie_name   }}</td>
+            <td>{{  collection.pop   }}</td>
+            <td>{{  collection.date  | date("m/d/Y") }}</td>
+          </tr>
+          {% set i = i + 1 %}
+    {% endfor %}
+      </tbody>
+    </table>
+    <h4>Mon historique : </h4>
+    <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom du quiz</th>
+            <th scope="col">Categorie du quiz</th>
+            <th scope="col">Popularite du quiz</th>
+            <th scope="col">Scores</th>
+            <th scope="col">Quizee le</th>
+          </tr>
+        </thead>
+        <tbody>
+    {% set i = 1 %}
+    {% for collections_History in collections_Historys %}
+          <tr>
+            <th scope="row">{{i}}</th>
+            <td>{{  collections_History.name   }}</td>
+            <td>{{  collections_History.categorie_name   }}</td>
+            <td>{{  collections_History.pop   }}</td>
+            <td>{{  collections_History.score   }}</td>
+            <td>{{  collections_History.date  | date("m/d/Y") }}</td>
+          </tr>
+          {% set i = i + 1 %}
+    {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}

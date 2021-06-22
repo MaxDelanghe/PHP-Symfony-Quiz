@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un utilisateur{% endblock %}
+
+{% block body %}
+<div style="margin:auto;"class="container">
+
+    <h1>Ajouter une categorie</h1>
+    <p>Pour l'image veuillez choisir une url</p>
+    {{ form_start(categorieForm) }}
+    {{ form_row(categorieForm.name, {'attr': {'placeholder': '...'}}) }}
+    {{ form_row(categorieForm.image, {'attr': {'placeholder': 'URL'}}) }}
+    {{ form_row(categorieForm.presentation, {'attr': {'placeholder': '...'}}) }}
+
+    <button type="submit" class="btn btn-info">Vallider</button>
+    {{ form_end(categorieForm) }}
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des quiz !{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="/css/list.css">
+
+    <div style="margin-left:100px;" class="container containerlist">
+        <div class="row">
+            {% for categorie in categories %}
+            <div class="col-sm-4">
+
+            {% set rand = random(['#bacad7', '#4766ff', '#e6c34a', '#ebb1ea', '#f24a33', '#719c70', '#e6c34a', '#05ffa1', '#b16551']) %}
+
+            <div class="property-card">
+              <a href="{{ path("show_categorie", {'id': categorie.id} ) }}">
+                <div class="property-image">
+                <img class="imgbox" src="{{ categorie.image }}" alt="">
+
+                  <div class="property-image-title">
+                    <!-- Optional <h5>Card Title</h5> If you want it, turn on the CSS also. -->
+                  </div>
+                </div>
+            </a>
+              <div class="property-description">
+                <h5 style="color: {{ rand }};"> {{ categorie.name }} </h5>
+                <p>{{ categorie.presentation }}</p>
+              </div>
+            </div>
+        </div>
+    {% endfor %}
+        </div> 
+    </div>
+</div>
+
+{% endblock %}
+
+
+

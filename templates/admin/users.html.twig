@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Liste des utilisateurs</h1>
+    <table class="table table-striped table-dark">
+        <thead>
+            <th scope="col">ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">Username</th>
+            <th scope="col">Pseudo</th>
+            <th scope="col">Rôles</th>
+            <th scope="col">Actions</th>
+        </thead>
+        <tbody>
+        {# On boucle sur les utilisateurs #}
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.pseudo }}</td>
+                <td>
+                    {# On boucle sur les rôles #}
+                    {% for role in user.roles %}
+                        {% if role == "ROLE_USER" %}
+                            Utilisateur
+                        {% elseif role == "ROLE_EDITOR" %}
+                            Editeur
+                        {% elseif role == "ROLE_ADMIN" %}
+                            Administrateur
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td><a href="{{ path('admin_modifier_utilisateur', {'id': user.id}) }}">Modifier</a>
+                <a style="color: red;" href="{{ path('admin_erase_user', {'id': user.id}) }}">Suprimer</a>
+                <a style="color: yellow;" href="{{ path('admin_email_to_user', {'id': user.id}) }}">Contacter</a></td>
+            </tr>
+            
+        {% else %}
+            <p>Aucun utilisateur inscrit</p>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
